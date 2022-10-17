@@ -42,7 +42,6 @@ public class Util {
                 settings.put(Environment.USER, USER);
                 settings.put(Environment.PASS, PSWD);
                 settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
-
                 settings.put(Environment.SHOW_SQL, "true");
 
                 settings.put(Environment.CURRENT_SESSION_CONTEXT_CLASS, "thread");
@@ -63,6 +62,9 @@ public class Util {
             }
         }
         return sessionFactory;
+    }
+    public static void FactoryClose() {
+        sessionFactory.close();
     }
 
 }
