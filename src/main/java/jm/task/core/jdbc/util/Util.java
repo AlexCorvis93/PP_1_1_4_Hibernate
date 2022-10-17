@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 import jm.task.core.jdbc.model.User;
+import org.hibernate.HibernateError;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 import org.hibernate.mapping.Property;
@@ -24,6 +25,7 @@ public class Util {
         Connection connection = null;
         try {
             connection = DriverManager.getConnection(URL, USER, PSWD);
+            connection.setAutoCommit(false);
         }catch (SQLException e) {
             System.out.println("Connection error");
         }
@@ -55,8 +57,8 @@ public class Util {
                         .applySettings(configuration.getProperties()).build();
 
                 sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-            } catch (Exception e) {
-                System.out.println("Error");
+            } catch (HibernateError e) {
+                System.out.println("Error Hibernate connection");
 
             }
         }
